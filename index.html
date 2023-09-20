@@ -1,23 +1,79 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
-    <script>
-        function exibe_ola(){
-alert("Olá pessoal!")
+    <style>
+        .Abaixo-do-peso{
+            color: blueviolet;
         }
+    </style>
+    <script>
+        function soma(vetor) {
+            let soma = 0;
+            for (v of vetor) {
+                soma = soma + v;
+            }
+            return soma;
+        }
+
         
+
+        function click_calcular() {
+            let valorAltura = document.getElementById("txtAltura").value;
+            let valorPeso = document.getElementById("txtPeso").value;
+            let imc = valorPeso / (valorAltura * valorAltura);
+            document.getElementById("txtSoma").value = imc;
+            let categoria = 0;
+            if (imc < 18) {
+            document.getElementById("cor").value = "Abaixo do peso";
+            }
+            else if (imc < 24) {
+                categoria = "Normal"
+            }
+            else if (imc < 29) {
+                categoria = "Pré-obeso"
+            }
+            else if (imc < 35) {
+                categoria = "Obesidade classe I"
+            }
+        }
+
+        function click_limpar() {
+            document.getElementById("txtAltura").value = "";
+            document.getElementById("txtPeso").value = "";
+            document.getElementById("txtSoma").value = "";
+
+        }
+
+
     </script>
 </head>
+
 <body>
     <form class="forms">
         <h1>Informçãoes pessoais</h1>
-        <div>
-            <label for="altura">Informe sua altura</label>
-            <input type="text" id="altura" name="altura">
-        </div>
-    </form>
+        <form>
+            <div>
+                <label for="txtAltura">Altura</label>
+                <input type="number" name="" id="txtAltura" value="1">
+            </div>
+            <div>
+                <label for="txtPeso">Peso</label>
+                <input type="number" name="" id="txtPeso">
+            </div>
+            <div>
+                <label for="txtSoma">Soma </label>
+                <input type="number" name="" id="txtSoma" disabled>
+            </div>
+            <div>
+                <input type="button" value="Calcular" onclick="click_calcular();">
+
+                <input type="button" value="Limpar" onclick="click_limpar();">
+            </div>
+        </form>
 </body>
+
 </html>
