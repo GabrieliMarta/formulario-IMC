@@ -6,47 +6,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form</title>
     <style>
-        .Abaixo-do-peso{
-            color: blueviolet;
+        form label {
+            font-size: 25px;
+            margin: 20px;
+            font-family: 'Gotu', sans-serif;
+
         }
-    </style>
+
+        body {
+            background-color: darksalmon;
+            text-align: center;
+        }
+
+
+        h1 {
+            font-size: 50px;
+            color: black;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        </style>
     <script>
-        function soma(vetor) {
-            let soma = 0;
-            for (v of vetor) {
-                soma = soma + v;
-            }
-            return soma;
-        }
-
-        
-
         function click_calcular() {
-            let valorAltura = document.getElementById("txtAltura").value;
-            let valorPeso = document.getElementById("txtPeso").value;
-            let imc = valorPeso / (valorAltura * valorAltura);
-            document.getElementById("txtSoma").value = imc;
-            let categoria = 0;
-            if (imc < 18) {
-            document.getElementById("cor").value = "Abaixo do peso";
-            }
-            else if (imc < 24) {
-                categoria = "Normal"
-            }
-            else if (imc < 29) {
-                categoria = "Pré-obeso"
-            }
-            else if (imc < 35) {
-                categoria = "Obesidade classe I"
+            let altura = document.getElementById("altura").value;
+            let massa = document.getElementById("massa").value;
+            if (altura == "") {
+                alert("Informe a sua altura");
+            } else if (massa == "") {
+                alert("Informe o seu peso");
+            } else {
+                let Calculo = Number(massa) / (Number(altura) * Number(altura));
+                document.getElementById("calculo").value = Calculo;
+                if (Calculo < 18.6) {
+
+                    document.getElementById("calculo").style.background = "blue";
+
+                }
+                else if (Calculo > 18.5 && Calculo < 25) {
+
+                    document.getElementById("calculo").style.background = "green";
+
+                }
+                else if (Calculo > 24.9 && Calculo < 30) {
+
+                    document.getElementById("calculo").style.background = "yellow";
+
+                }
+                else if (Calculo > 29.9 && Calculo < 35) {
+                    document.getElementById("calculo").style.background = "orange";
+
+                }
+                else if (Calculo > 34.9 && Calculo < 30) {
+                    document.getElementById("calculo").style.background = "#FA4C37";
+
+                }
+                else if (Calculo > 40) {
+                    document.getElementById("calculo").style.background = "#FA0101";
+
+                }
+
             }
         }
 
-        function click_limpar() {
-            document.getElementById("txtAltura").value = "";
-            document.getElementById("txtPeso").value = "";
-            document.getElementById("txtSoma").value = "";
-
+        function click_apagar() {
+            document.getElementById("altura").value = "";
+            document.getElementById("massa").value = "";
+            document.getElementById("calculo").value = "";
         }
+        
 
 
     </script>
@@ -54,28 +80,40 @@
 
 <body>
     <form class="forms">
-        <h1>Informçãoes pessoais</h1>
-        <form>
-            <div>
-                <label for="txtAltura">Altura</label>
-                <input type="number" name="" id="txtAltura" value="1">
-            </div>
-            <div>
-                <label for="txtPeso">Peso</label>
-                <input type="number" name="" id="txtPeso">
-            </div>
-            <div>
-                <label for="txtSoma">Soma </label>
-                <input type="number" name="" id="txtSoma" disabled>
-            </div>
-            <div>
-                <input type="button" value="Calcular" onclick="click_calcular();">
+        <h1>Informaçãos pessoais</h1>
+        <div>
+            <label for="altura">Informe sua altura:</label><br>
+            <input type="number" id="altura" name=" "><br>
+        </div>
+        <div>
+            <label for="massa">Informe sua massa corporal</label><br>
+            <input type="number" id="massa" name=" "><br>
+        </div>
+        <div>
+            <label for="calculo">Calculo:</label>
+            <input type="number" name="" id="calculo" disabled>
+        </div>
+        <div>
+            <input type="button" value="Calcular" onclick="click_calcular();">
 
-                <input type="button" value="Limpar" onclick="click_limpar();">
-            </div>
-        </form>
+            <input type="button" value="Apagar" onclick="click_apagar();">
+        </div>
+    </form>
+    <h1>Classificações</h1>
+    <br>
+    <h2 style="color: blue;">Abaixo do peso</h2>
+    <br>
+    <h2 style="color: green;">Peso Normal</h2>
+    <br>
+    <h2 style="color: yellow;">Acima do Peso</h2>
+    <br>
+    <h2 style="color: orange;">Obesidade I</h2>
+    <br>
+    <h2 style="color: #FA4C37;">Obesidade II</h2>
+    <br>
+    <h2 style="color: #FA0101;">Obesidade III</h2>
+</form>
 </body>
-
 </html>
 <!DOCTYPE html>
 <html lang="en">
