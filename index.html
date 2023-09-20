@@ -77,3 +77,71 @@
 </body>
 
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        #resultado {
+            font-weight: bold;
+        }
+        .abaixo-peso { color: red; }
+        .peso-normal { color: green; }
+        .sobrepeso { color: orange; }
+        .obesidade-grau-i { color: purple; }
+        .obesidade-grau-ii { color: blue; }
+        .obesidade-grau-iii { color: darkred; }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de IMC</h1>
+    <form id="imc-form">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" step="0.01" id="peso" required><br><br>
+
+        <label for="altura">Altura (metros):</label>
+        <input type="number" step="0.01" id="altura" required><br><br>
+
+        <input type="submit" value="Calcular">
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        document.getElementById("imc-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var peso = parseFloat(document.getElementById("peso").value);
+            var altura = parseFloat(document.getElementById("altura").value);
+            var imc = peso / (altura * altura);
+            var categoria;
+
+            if (imc < 18.5) {
+                categoria = "Abaixo do Peso";
+                cor = "abaixo-peso";
+            } else if (imc < 24.9) {
+                categoria = "Peso Normal";
+                cor = "peso-normal";
+            } else if (imc < 29.9) {
+                categoria = "Sobrepeso";
+                cor = "sobrepeso";
+            } else if (imc < 34.9) {
+                categoria = "Obesidade Grau I";
+                cor = "obesidade-grau-i";
+            } else if (imc < 39.9) {
+                categoria = "Obesidade Grau II";
+                cor = "obesidade-grau-ii";
+            } else {
+                categoria = "Obesidade Grau III";
+                cor = "obesidade-grau-iii";
+            }
+
+            var resultado = "Seu IMC é: " + imc.toFixed(2) + "<br>Categoria: <span class='" + cor + "'>" + categoria + "</span>";
+
+            document.getElementById("resultado").innerHTML = resultado;
+        });
+    </script>
+</body>
+</html>
